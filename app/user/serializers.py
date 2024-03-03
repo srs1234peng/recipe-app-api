@@ -1,8 +1,12 @@
 """
 Serializers for the user API View.
 """
+<<<<<<< HEAD
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+=======
+from django.contrib.auth.models import ger_user_model
+>>>>>>> 2a92dbb4a31e0055fa2ab6340d780f9b3d283e59
 
 from rest_framework import serializers
 
