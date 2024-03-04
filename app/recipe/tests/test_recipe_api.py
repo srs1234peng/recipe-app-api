@@ -79,11 +79,13 @@ class PrivateRecipeApiTests(TestCase):
         serializer = RecipeSerializer(recipes, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
-    
+
     def test_recipes_list_limited_to_user(self):
         """Test list of recipes is limited to authenticated user."""
-        other_user = create_user(email='other@example.com',
-        password='password123',)
+        other_user = create_user(
+            email='other@example.com',
+            password='password123',
+        )
         create_recipe(user=other_user)
 
         res = self.client.get(RECIPES_URL)
@@ -164,8 +166,10 @@ class PrivateRecipeApiTests(TestCase):
 
     def test_update_user_returns_error(self):
         """Test updating recipe of other user returns error."""
-        new_user = create_user(email='user2@example.com',
-        password='password123')
+        new_user = create_user(
+            email='user2@example.com',
+            password='password123'
+        )
         recipe = create_recipe(user=self.user)
 
         payload = {'user': new_user.id}
