@@ -64,7 +64,8 @@ class PrivateRecipeApiTests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = create_user(email='user@example.com', password='password123')
+        self.user = create_user(
+            email='user@example.com', password='password123')
         self.client.force_authenticate(self.user)
 
     def test_retrieve_recipes(self):
@@ -81,9 +82,9 @@ class PrivateRecipeApiTests(TestCase):
     
     def test_recipes_list_limited_to_user(self):
         """Test list of recipes is limited to authenticated user."""
-        other_user = create_user(email='other@example.com', password='password123',)
+        other_user = create_user(email='other@example.com',
+        password='password123',)
         create_recipe(user=other_user)
-        recipe = create_recipe(user=self.user)
 
         res = self.client.get(RECIPES_URL)
 
@@ -113,7 +114,7 @@ class PrivateRecipeApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         recipe = Recipe.objects.get(id=res.data['id'])
-        for k,v in payload.items():
+        for k, v in payload.items():
             self.assertEqual(getattr(recipe, k), v)
         self.assertEqual(recipe.user, self.user)
 
@@ -121,7 +122,7 @@ class PrivateRecipeApiTests(TestCase):
         """Test partial update of a recipe."""
         original_link = 'https://example.com/recipe.pdf'
         recipe = create_recipe(
-            user=self.user, 
+            user=self.user,
             title='Sample recipe title',
             link=original_link,
         )
@@ -163,7 +164,8 @@ class PrivateRecipeApiTests(TestCase):
 
     def test_update_user_returns_error(self):
         """Test updating recipe of other user returns error."""
-        new_user = create_user(email='user2@example.com', password='password123')
+        new_user = create_user(email='user2@example.com',
+        password='password123')
         recipe = create_recipe(user=self.user)
 
         payload = {'user': new_user.id}
