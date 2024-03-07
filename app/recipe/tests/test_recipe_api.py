@@ -243,7 +243,7 @@ class PrivateRecipeApiTests(TestCase):
             'title': 'Pongal',
             'time_minutes': 60,
             'price': Decimal('4.50'),
-            'tags': [{'name': tag_indian.name}, {'name': 'Breakfast'}], 
+            'tags': [{'name': tag_indian.name}, {'name': 'Breakfast'}],
         }
         res = self.client.post(RECIPES_URL, payload, format='json')
 
@@ -264,7 +264,7 @@ class PrivateRecipeApiTests(TestCase):
         """Test creating a tag when updating a recipe."""
         recipe = create_recipe(user=self.user)
 
-        payload = {'tags': [{'name': 'Lunch'}],}
+        payload = {'tags': [{'name': 'Lunch'}], }
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
@@ -279,7 +279,7 @@ class PrivateRecipeApiTests(TestCase):
         recipe.tags.add(tag_breakfast)
 
         tag_lunch = Tag.objects.create(user=self.user, name='Lunch')
-        payload = {'tags': [{'name': 'Lunch'}],}
+        payload = {'tags': [{'name': 'Lunch'}], }
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
@@ -351,7 +351,7 @@ class PrivateRecipeApiTests(TestCase):
         """Test creating an ingredient when updating a recipe."""
         recipe = create_recipe(user=self.user)
 
-        payload = {'ingredients': [{'name': 'Limes'}],}
+        payload = {'ingredients': [{'name': 'Limes'}], }
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
@@ -366,7 +366,7 @@ class PrivateRecipeApiTests(TestCase):
         recipe.ingredients.add(ingredient1)
 
         ingredient2 = Ingredient.objects.create(user=self.user, name='Chili')
-        payload = {'ingredients': [{'name': 'Chili'}],}
+        payload = {'ingredients': [{'name': 'Chili'}], }
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 

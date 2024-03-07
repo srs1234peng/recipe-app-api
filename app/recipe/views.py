@@ -42,8 +42,6 @@ from recipe import serializers
         ]
     )
 )
-
-
 class RecipeViewSet(viewsets.ModelViewSet):
     """ View for manage recipe APIs."""
     serializer_class = serializers.RecipeDetailSerializer
